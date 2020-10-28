@@ -7,4 +7,5 @@ Annotation tools can create sub slices of images for better resolution when put 
 
 API usage:
 
-''' hihihihi '''
+`dc = DataCropper()`  Creates new DataCropper object, required to use the methods
+
