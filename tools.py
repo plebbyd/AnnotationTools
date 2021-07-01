@@ -138,21 +138,14 @@ class DataCropper():
 
         results = []
         for box in boxes:
-            #print("BOX: {}".format(box))
-            #print("BOX IND: {}".format(box[1]['xmin']))
             if box[2] is False:
                 sub_result = []
                 box[2] = True
                 print('h')
                 sub_result.append(box)
                 for ele in boxes:
-                    #print("ELE IND: {}".format(ele[1]['xmin']))
-                    #print("ELEMENT: {}".format(ele))
-
                     dx, dy = self.max([ele[1]['xmin'], ele[1]['xmax'], box[1]['xmin'], box[1]['xmax']]), self.max([ele[1]['ymin'], ele[1]['ymax'], box[1]['ymin'], box[1]['ymax']])
-                    #print('inside before subtraction area')
                     if dx < img_res * (1- res) and dy < img_res * (1- res) and (dx + dy) > 0:
-                        #print('inside subtraction area')
                         if ele[2] is False:
                             print("Element inside appending : {}".format(ele))
                             sub_result.append(ele)
@@ -199,7 +192,7 @@ class DataCropper():
         for box in boxes:
 
 
-            print('hi')
+            print('temporary')
 
 
         return True
@@ -226,14 +219,6 @@ class DataCropper():
         cv2.imwrite(save_path + '/' + self.img_path.replace('.jpg','') + 'slice{}'.format(id) + '.jpg', self.img_data[box[1]:box[3], box[0]:box[2]]) #This is [ymin:ymax, xmin:xmax] for some reason
         xp = XmlParser()
         xp.set_head(self.img_path.replace('.jpg','') + 'slice{}'.format(id) + '.jpg', width = width, height = height)
-        """
-        for b in bboxes:
-            print("b @0: {}".format(b[0]))
-            new_b = [b[0], int(b[1]['xmin']) - box[0], int(b[1]['ymin']) - box[1], int(b[1]['xmax']) - box[0], int(b[1]['ymax']) - box[1]]
-
-            xp.add_object(new_b[0], new_b[1], new_b[2], new_b[3], new_b[4])
-        """
-        print('SELF BOXES: {}'.format(self.boxes))
         for ob in self.boxes:
             print("SELF area: {}".format(self.area([int(ob[1]['xmin']), int(ob[1]['ymin']), int(ob[1]['xmax']), int(ob[1]['ymax'])], box)))
             if self.area([int(ob[1]['xmin']), int(ob[1]['ymin']), int(ob[1]['xmax']), int(ob[1]['ymax'])], box) is not None:
