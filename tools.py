@@ -59,7 +59,7 @@ class DataCropper():
 
 
         for square in range(round(boxes_aspect**multiplier)):
-            print('hi')
+            print('temporary string')
 
 
         return True
@@ -128,7 +128,6 @@ class DataCropper():
         xp = XmlParser()
         xp.load(self.xml_path)
         maxim = self.maxmin(box_group)
-        print("MAXIM : {}".format(maxim))
         xp.add_object('vis', maxim[0][0] , maxim[0][1] , maxim[1][0] , maxim[1][1])
         xp.save(self.xml_path)
         return True
@@ -141,13 +140,11 @@ class DataCropper():
             if box[2] is False:
                 sub_result = []
                 box[2] = True
-                print('h')
                 sub_result.append(box)
                 for ele in boxes:
                     dx, dy = self.max([ele[1]['xmin'], ele[1]['xmax'], box[1]['xmin'], box[1]['xmax']]), self.max([ele[1]['ymin'], ele[1]['ymax'], box[1]['ymin'], box[1]['ymax']])
                     if dx < img_res * (1- res) and dy < img_res * (1- res) and (dx + dy) > 0:
                         if ele[2] is False:
-                            print("Element inside appending : {}".format(ele))
                             sub_result.append(ele)
                             ele[2] = True
                 if len(sub_result) > 0 and sub_result != results[:]:
@@ -220,7 +217,6 @@ class DataCropper():
         xp = XmlParser()
         xp.set_head(self.img_path.replace('.jpg','') + 'slice{}'.format(id) + '.jpg', width = width, height = height)
         for ob in self.boxes:
-            print("SELF area: {}".format(self.area([int(ob[1]['xmin']), int(ob[1]['ymin']), int(ob[1]['xmax']), int(ob[1]['ymax'])], box)))
             if self.area([int(ob[1]['xmin']), int(ob[1]['ymin']), int(ob[1]['xmax']), int(ob[1]['ymax'])], box) is not None:
                 if self.area([int(ob[1]['xmin']), int(ob[1]['ymin']), int(ob[1]['xmax']), int(ob[1]['ymax'])], box) > 0.01:
 
@@ -230,7 +226,6 @@ class DataCropper():
 
 
         xp.template_parameters['path'] = xp.template_parameters['path'].replace('\\' , '/')
-        print(xp.template_parameters['path'])
         xp.save(save_path + '/' + self.img_path.replace('.jpg','') + 'slice{}'.format(id) + '.xml')
 
     def tile(self, image, row, col):
