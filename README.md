@@ -5,7 +5,7 @@ Annotation tools is used for already annotated image datasets to filter and refi
 Annotation tools can create sub slices of images for better resolution when put into training
 
 
-API usage:
+Usage:
 
 `dc = DataCropper()`  Creates new DataCropper object, required to use the methods
 
